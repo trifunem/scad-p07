@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    template.openshift.io/expose-uri: mysql://{.spec.clusterIP}:{.spec.ports[?(.name=="mysql")].port}
+  creationTimestamp: null
+  labels:
+    app: mysql-persistent
+    template: mysql-persistent-template
+  name: mysql-p07
+  selfLink: /api/v1/namespaces/appuio-demo1560/services/mysql-p07
+spec:
+  ports:
+  - name: mysql
+    port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    name: mysql-p07
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

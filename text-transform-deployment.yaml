@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f ../docker-compose.yml
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: text-transform
+  name: text-transform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: text-transform
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f ../docker-compose.yml
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: text-transform
+    spec:
+      containers:
+        - env:
+            - name: DATABASE_DB
+              value: database
+            - name: DATABASE_HOST
+              value: mysql-p07
+            - name: DATABASE_PASSWORD
+              value: userpassword
+            - name: DATABASE_PORT
+              value: "3306"
+            - name: DATABASE_USER
+              value: user
+          image: scadteam6/p07-text-transform-microservice
+          name: text-transform
+          ports:
+            - containerPort: 3000
+          resources: {}
+      restartPolicy: Always
+status: {}

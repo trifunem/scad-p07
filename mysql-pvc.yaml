@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    pv.kubernetes.io/bind-completed: "yes"
+    pv.kubernetes.io/bound-by-controller: "yes"
+  creationTimestamp: null
+  finalizers:
+  - kubernetes.io/pvc-protection
+  labels:
+    app: mysql-persistent
+    template: mysql-persistent-template
+  name: mysql-p07
+  selfLink: /api/v1/namespaces/appuio-demo1560/persistentvolumeclaims/mysql-p07
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: gluster-pv584
+status: {}
